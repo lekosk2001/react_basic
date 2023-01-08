@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate  } from 'react-router-dom'
 
 function BlogForm() {
 
+const navigate = useNavigate()
 const [title, setTitle] = useState('')
 const [body, setBody] = useState('')
 
@@ -10,7 +12,7 @@ const onSubmit = () =>{
 axios.post('http://localhost:3001/posts',{
     title,
     body
-})
+}).then(navigate("/blogs"))
 }
 
 return (

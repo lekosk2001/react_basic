@@ -4,7 +4,8 @@ import React from 'react'
 export default function Card({title,children,onClick}) {
     return (
         <div 
-            className='card mb-3 list-group-item-action pe-auto'
+            className='card mb-3 list-group-item-action'
+            style={{ cursor:"pointer" }}
             onClick={onClick}
         >
             <div className='card-body'>
