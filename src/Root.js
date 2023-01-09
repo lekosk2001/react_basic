@@ -18,7 +18,7 @@ export default function Root() {
         </div>
       </nav>
 
-        <main className='container'>
+        <main className='container pt-3'>
           <Outlet/>
         </main>
     </>

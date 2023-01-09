@@ -3,6 +3,7 @@ import ErrorPage from './ErrorPage'
 import BlogCreatePage from './pages/BlogCreatePage';
 import BlogListsPage from './pages/BlogListsPage';
 import BlogEditPage from './pages/BlogEditPage';
+import BlogShowPage from './pages/BlogShowPage';
 import Root from './Root'
 import {
     createBrowserRouter
@@ -25,9 +26,14 @@ const router = createBrowserRouter([
             {
                 path: "blogs/create",
                 element: <BlogCreatePage />
-            },            {
-                path: "blogs/edit",
+            },
+            {
+                path: "blogs/:id/edit",
                 element: <BlogEditPage />
+            },
+            {
+                path: "blogs/:id",
+                element: <BlogShowPage />
             },
         ],
     },

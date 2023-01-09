@@ -41,7 +41,7 @@ const renderBlogList = () => {
   return lists.map(post=>{return <Card 
     key={post.id}
     title={post.title}
-    onClick={()=>{navigate("/blogs/edit")}}
+    onClick={()=>{navigate(`/blogs/${post.id}`)}}
     >
     <button 
       className='btn btn-danger btn-sm'
@@ -56,7 +56,7 @@ const renderBlogList = () => {
   }, [])
   
   return (
-    <div className='mt-3 list-group'>
+    <div className='list-group'>
       <div className='d-flex justify-content-between'>
         <h1>Blogs</h1>
         <div>
