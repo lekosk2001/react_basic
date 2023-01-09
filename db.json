@@ -1,11 +1,25 @@
 {
   "posts": [
     {
-      "title": "ㄹㅇ휴ㅗㅎ류ㅗㄹㅇㅎㅇㅀ",
-      "body": "ㅇㅀㅇㅀㅇㅀㄹㄴㅇㅎㄹㅇ",
+      "title": "fghfgh",
+      "body": "gfhfgh",
       "publish": true,
-      "createdAt": 1673258770594,
+      "createdAt": 1673264135421,
       "id": 1
+    },
+    {
+      "title": "asdasdads",
+      "body": "asdadsasdasdads",
+      "publish": true,
+      "createdAt": 1673264536530,
+      "id": 2
+    },
+    {
+      "title": "asdasdasdad",
+      "body": "sasdasdads",
+      "publish": false,
+      "createdAt": 1673264540875,
+      "id": 3
     }
   ]
 }

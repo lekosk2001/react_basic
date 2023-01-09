@@ -8,11 +8,9 @@ export default function Card({title,children,onClick}) {
             style={{ cursor:"pointer" }}
             onClick={onClick}
         >
-            <div className='card-body'>
-                <div className='d-flex justify-content-between'>
-                    <div className='card-title'>{title}</div>
-                    {children&&<>{children}</>}
-                </div>
+            <div className='py-2 card-body d-flex align-items-center'>
+                <div className='card-title flex-grow-1'>{title}</div>
+                {children&&<>{children}</>}
             </div>
         </div>
     )

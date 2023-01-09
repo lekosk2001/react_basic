@@ -2,6 +2,7 @@ import Home from './pages/Home';
 import ErrorPage from './ErrorPage'
 import BlogCreatePage from './pages/BlogCreatePage';
 import BlogListsPage from './pages/BlogListsPage';
+import AdminBlogListsPage from './pages/AdminBlogListsPage';
 import BlogEditPage from './pages/BlogEditPage';
 import BlogShowPage from './pages/BlogShowPage';
 import Root from './Root'
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: "blogs",
                 element: <BlogListsPage />
+            },
+            {
+                path: "Admin",
+                element: <AdminBlogListsPage />
             },
             {
                 path: "blogs/create",
