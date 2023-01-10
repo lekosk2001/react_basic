@@ -37,7 +37,7 @@ export default function BlogShowPage() {
                 <h1 className='flex-grow-1'>{data.title}</h1>
                 <div><Link className='btn btn-primary' to={`/blogs/${id}/edit`}>수정</Link></div>
             </div>
-            <small className='text-muted'>Created At{printDate(data.createdAt)}</small>
+            <small className='text-muted'>Created At {printDate(data.createdAt)}</small>
             <hr></hr>
             <p>{data.body}</p>
         </div>

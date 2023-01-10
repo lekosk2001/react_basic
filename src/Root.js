@@ -13,7 +13,7 @@ export default function Root() {
                 activeclassname="active"
                 className='nav-link'
                 aria-current="page" 
-                to="Admin">Admin</NavLink>
+                to="admin">Admin</NavLink>
             </li>
             <li className='nav-item'>
               <NavLink

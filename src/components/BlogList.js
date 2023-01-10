@@ -4,23 +4,45 @@ import React, { useState,useEffect } from 'react'
 import { useNavigate  } from 'react-router-dom'
 import axios from 'axios'
 import PropTypes from 'prop-types'
+import Pagenation from './Pagenation'
 
 export default function BlogList({isAdmin}) {
 
     const [lists, setLists] = useState([])
     const [loading, setLoading] = useState(true)
-    const navigate = useNavigate()   
+    const [currentPage, setCurrentPage] = useState(1)
+    const [numberOfPosts, setNumberOfPosts] = useState(0)
+    const [numberOfPages, setNumberOfPages] = useState(0)
+    const navigate = useNavigate()
+    const limit = 5
     
-        const getPosts = () => {
-            axios.get('http://localhost:3001/posts').then((req)=>{
-            setLists(req.data)
-            setLoading(false)
-            })
+    const getPosts = (page = 1) => {
+        setCurrentPage(page);
+        let params = {
+            _page:page,
+            _limit:limit,
+            _sort:'id',
+            _order:'asc',
         }
 
-        useEffect(() => {
-            getPosts()
-        }, [])
+        if(!isAdmin){
+            params = {...params, publish:true}
+        }
+
+        axios.get(`http://localhost:3001/posts`,{params}).then((res)=>{
+            setNumberOfPosts(res.headers['x-total-count'])
+            setLists(res.data)
+            setLoading(false)
+            })
+    }
+
+    useEffect(()=>{
+        setNumberOfPages(Math.ceil(numberOfPosts/limit))
+    },[numberOfPosts])
+
+    useEffect(() => {
+        getPosts()
+    }, [])
     
     const deleteBlog = (e,id) => {
         e.stopPropagation()
@@ -44,8 +66,9 @@ export default function BlogList({isAdmin}) {
             return <div>"no blog contents found"</div>
         }
         
-        return lists.filter(post=>{ return post.publish || isAdmin }).map(post=>{
+        return lists.map(post=>{
             return <Card 
+                id={post.id}
                 key={post.id}
                 title={post.title}
                 onClick={()=>{navigate(`/blogs/${post.id}`)}}
@@ -64,7 +87,14 @@ export default function BlogList({isAdmin}) {
 
 
     return (
-    <>{renderBlogList()}</>
+    <>
+        {renderBlogList()}
+        {numberOfPages>1 &&<Pagenation
+            currentPage={currentPage}
+            numberOfPages={numberOfPages}
+            onClick={getPosts}
+        />}
+    </>
     )
 }
 

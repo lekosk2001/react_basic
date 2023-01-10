@@ -25,7 +25,7 @@ const router = createBrowserRouter([
                 element: <BlogListsPage />
             },
             {
-                path: "Admin",
+                path: "admin",
                 element: <AdminBlogListsPage />
             },
             {

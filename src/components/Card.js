@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-export default function Card({title,children,onClick}) {
+export default function Card({id,title,children,onClick}) {
     return (
         <div 
             className='card mb-3 list-group-item-action'
@@ -9,7 +9,8 @@ export default function Card({title,children,onClick}) {
             onClick={onClick}
         >
             <div className='py-2 card-body d-flex align-items-center'>
-                <div className='card-title flex-grow-1'>{title}</div>
+                {/* <div className='text-secondary me-2 border-end'>{id}</div> */}
+                <div className='card-title flex-grow-1 mb-0'>{title}</div>
                 {children&&<>{children}</>}
             </div>
         </div>

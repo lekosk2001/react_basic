@@ -34,7 +34,7 @@ const onSubmit = () =>{
             body,
             publish,
             createdAt:Date.now()
-        }).then(navigate("/blogs"))
+        }).then(navigate("/admin"))
     }
 }
 
