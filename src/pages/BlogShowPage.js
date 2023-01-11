@@ -10,7 +10,6 @@ export default function BlogShowPage() {
 
     const getPost = (id) =>{
         axios.get(`http://localhost:3001/posts/${id}`).then((req)=>{
-            console.log(req.data)
             setData(req.data)
             setLoading(false)
         })

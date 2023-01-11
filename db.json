@@ -1,8 +1,8 @@
 {
   "posts": [
     {
-      "title": "1",
-      "body": "1",
+      "title": "22",
+      "body": "12",
       "publish": true,
       "createdAt": 1673267361618,
       "id": 1
@@ -160,13 +160,6 @@
       "publish": false,
       "createdAt": 1673336290259,
       "id": 23
-    },
-    {
-      "title": "ㄴㅇㄹㅇㄹㄴㄴㅇㄹ",
-      "body": "ㄹㄴㅇㄹㄴㄹㅇ",
-      "publish": false,
-      "createdAt": 1673336292627,
-      "id": 24
     },
     {
       "title": "ㅇㄹㅇㄹㄴㄴㅇㄹ",
