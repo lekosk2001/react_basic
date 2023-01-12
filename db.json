@@ -1,67 +1,11 @@
 {
   "posts": [
     {
-      "title": "22",
-      "body": "12",
-      "publish": true,
-      "createdAt": 1673267361618,
-      "id": 1
-    },
-    {
-      "title": "2",
-      "body": "2",
-      "publish": true,
-      "createdAt": 1673267364114,
-      "id": 2
-    },
-    {
-      "title": "3",
-      "body": "3",
-      "publish": false,
-      "createdAt": 1673267366028,
-      "id": 3
-    },
-    {
       "title": "4",
       "body": "4",
       "publish": false,
       "createdAt": 1673267368394,
       "id": 4
-    },
-    {
-      "title": "5",
-      "body": "5",
-      "publish": true,
-      "createdAt": 1673267371530,
-      "id": 5
-    },
-    {
-      "title": "6",
-      "body": "6",
-      "publish": true,
-      "createdAt": 1673267374666,
-      "id": 6
-    },
-    {
-      "title": "7",
-      "body": "7",
-      "publish": true,
-      "createdAt": 1673267377195,
-      "id": 7
-    },
-    {
-      "title": "sdfsdf",
-      "body": "dfsdsfsdfsdfsdf",
-      "publish": true,
-      "createdAt": 1673333398349,
-      "id": 8
-    },
-    {
-      "title": "dfdggf",
-      "body": "gfdfgdfg",
-      "publish": true,
-      "createdAt": 1673335445438,
-      "id": 9
     },
     {
       "title": "dfgdfgdgf",
@@ -76,20 +20,6 @@
       "publish": false,
       "createdAt": 1673335450087,
       "id": 11
-    },
-    {
-      "title": "dfgdfgdfg",
-      "body": "dfgsdgfsdfg",
-      "publish": false,
-      "createdAt": 1673335452526,
-      "id": 12
-    },
-    {
-      "title": "sdsfdfs",
-      "body": "sdfsdfsdf",
-      "publish": false,
-      "createdAt": 1673335463038,
-      "id": 13
     },
     {
       "title": "assdfsdf",
