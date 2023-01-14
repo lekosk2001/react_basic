@@ -2,8 +2,11 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams  } from 'react-router-dom'
+import useToasts from '../hooks/toast'
+import LoadingSpinner from '../components/LoadingSpinner'
+import { useSelector } from 'react-redux';
 
-function BlogForm({editing,addToasts}) {
+function BlogForm({editing}) {
     const navigate = useNavigate()
     const [originalTitle, setOriginalTitle] = useState('')
     const [title, setTitle] = useState('')
@@ -13,6 +16,14 @@ function BlogForm({editing,addToasts}) {
     const [publish, setPublish] = useState(false)
     const [titleError, setTitleError] =useState(false)
     const [bodyError, setBodyError] =useState(false)
+    const {addToasts} = useToasts()
+    const [loading, setLoading] = useState(true)
+    const [error,setError] = useState('')
+    const isLoggedIn = useSelector(state=>state.auth.isLoggedIn)
+    
+    if (!isLoggedIn){
+        navigate(`/`)
+    }
 
     const isEdited = () => {
         return title !== originalTitle || body !== originalBody || publish !== originalPublish
@@ -58,6 +69,13 @@ const onSubmit = () =>{
                 })
                 navigate(`/blogs/${id}`)
             })
+            .catch((e)=>{
+                setError('수정 실패.')
+                addToasts({
+                    text : '수정 실패.',
+                    type : 'danger'
+                })
+            })
         }else{
             axios.post('http://localhost:3001/posts',{
                 title,
@@ -65,11 +83,20 @@ const onSubmit = () =>{
                 publish,
                 createdAt:Date.now()
             }).then(()=>{
+                setLoading(false)
+                setError('생성 실패.')
                 addToasts({
                     type:'success',
                     text: '성공적으로 생성되었습니다.'
                 })
                 navigate("/admin")
+            })
+            .catch((e)=>{
+                setLoading(false)
+                addToasts({
+                    text : '생성 실패.',
+                    type : 'danger'
+                })
             })
         }
     }
@@ -96,65 +123,82 @@ useEffect(() => {
         setOriginalTitle(res.data.title);
         setOriginalBody(res.data.body);
         setOriginalPublish(res.data.publish);
-    })}
-}, [id,editing])
+        })
+        .catch((e)=>{
+            setError('게시글 불러오기 실패.')
+            addToasts({
+                text : '게시글 불러오기 실패.',
+                type : 'danger'
+            })
+            setLoading(false)
+            })
+        }
+        else{
+            setLoading(false)
+        }
+}, [id])
 
+
+if(loading){
+    return (
+        <LoadingSpinner/>
+    )
+}
+
+if (error){
+    return <div>{error}</div>
+}
 
 return (
-<div>
+    <div>
+        <h1>{editing?"Edit post":"Create a blog post"}</h1>
+            <div className='mb-3'>
+                <label className='form-lable'>Title</label>
+                <input 
+                    className={`form-control ${titleError&&"border-danger"}`}
+                    value={title}
+                    onChange={(e)=>{setTitle(e.target.value)}}
+                />
+                {titleError && <div className='text-danger'>Title is required.</div>}
+            </div>
+            <div className='mb-3'>
+                <label className='form-lable'>Body</label>
+                <textarea 
+                    className={`form-control ${bodyError&&"border-danger"}`}
+                    rows="10"
+                    value={body}
+                    onChange={(e)=>{setBody(e.target.value)}}
+                />
+                {bodyError && <div className='text-danger'>Body is required.</div>}
+            </div>
 
-    <h1>{editing?"Edit post":"Create a blog post"}</h1>
-        <div className='mb-3'>
-            <label className='form-lable'>Title</label>
-            <input 
-                className={`form-control ${titleError&&"border-danger"}`}
-                value={title}
-                onChange={(e)=>{setTitle(e.target.value)}}
-            />
-            {titleError && <div className='text-danger'>Title is required.</div>}
+        <div className='form-check mb-3'>
+            <input
+                    className='form-check-input'
+                    type="checkbox"
+                    checked={publish}
+                    onChange={onChangePublish}
+                    id="publishCheck"
+                /> 
+            <label htmlFor="publishCheck" className='form-check-label'>Publish</label>
         </div>
-        <div className='mb-3'>
-            <label className='form-lable'>Body</label>
-            <textarea 
-                className={`form-control ${bodyError&&"border-danger"}`}
-                rows="10"
-                value={body}
-                onChange={(e)=>{setBody(e.target.value)}}
-            />
-            {bodyError && <div className='text-danger'>Body is required.</div>}
-        </div>
 
-    
+        <button
+            className='btn btn-primary'
+            onClick={onSubmit}
+            disabled={editing && !isEdited()}
+        >
+            {editing?"Edit":"Post"}
+        </button>
 
-    <div className='form-check mb-3'>
-        <input
-                className='form-check-input'
-                type="checkbox"
-                checked={publish}
-                onChange={onChangePublish}
-                id="publishCheck"
-
-            /> 
-                <label htmlFor="publishCheck" className='form-check-label'>Publish</label>
+        <button
+            className='btn btn-danger ms-2'
+            onClick={goBack}
+        >
+            Cancle
+        </button>
 
     </div>
-
-    <button
-        className='btn btn-primary'
-        onClick={onSubmit}
-        disabled={editing && !isEdited()}
-    >
-        {editing?"Edit":"Post"}
-    </button>
-
-    <button
-        className='btn btn-danger ms-2'
-        onClick={goBack}
-    >
-        Cancle
-    </button>
-
-</div>
 );
 }
 

@@ -9,10 +9,9 @@ import BlogShowPage from './pages/BlogShowPage';
 import Root from './Root'
 import {createBrowserRouter} from "react-router-dom";
 import {RouterProvider} from "react-router-dom";
-import { useSelector } from 'react-redux'
 
 export default function App() {
-    const isLoggedIn = useSelector(state=>state.auth.isLoggedIn)
+
     
     const router = createBrowserRouter([
         {
@@ -30,15 +29,18 @@ export default function App() {
                 },
                 {
                     path: "admin",
-                    element: isLoggedIn?<AdminBlogListsPage />:<Home />
+                    element: <AdminBlogListsPage />,
+                    auth: true
                 },
                 {
                     path: "blogs/create",
-                    element: isLoggedIn?<BlogCreatePage />:<Home />
+                    element: <BlogCreatePage />,
+                    auth: true
                 },
                 {
                     path: "blogs/:id/edit",
-                    element: isLoggedIn?<BlogEditPage />:<Home />
+                    element: <BlogEditPage />,
+                    auth: true
                 },
                 {
                     path: "blogs/:id",

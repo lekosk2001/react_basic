@@ -11,7 +11,22 @@ export default function Root() {
   const isLoggedIn = useSelector(state=>state.auth.isLoggedIn)
   const dispatch = useDispatch()
 
-  console.log(Root)
+  const loginHandler = () =>{
+    if(isLoggedIn){
+      dispatch(logOut())
+      addToasts({
+        text : '로그아웃되었습니다.',
+        type : 'success'
+    })}
+
+    else {
+      dispatch(logIn())
+      addToasts({
+        text : '로그인되었습니다.',
+        type : 'success'
+    })
+    }
+  }
   
   return (
     <>
@@ -27,19 +42,20 @@ export default function Root() {
             <li className='nav-item me-2'>
               <button
                 className='text-white btn btn-link text-decoration-none'
-                onClick={()=>{isLoggedIn?dispatch(logOut()):dispatch(logIn())}}
+                onClick={()=>{loginHandler()}}
               >
                 {isLoggedIn?"Logout":"Login"}
               </button>
             </li>
 
-            <li className='nav-item me-2'>
-              <NavLink
-                activeclassname="active"
-                className='nav-link'
-                aria-current="page" 
-                to="admin">Admin</NavLink>
-            </li>
+            {isLoggedIn&&
+              <li className='nav-item me-2'>
+                <NavLink
+                  activeclassname="active"
+                  className='nav-link'
+                  aria-current="page" 
+                  to="admin">Admin</NavLink>
+              </li>}
 
             <li className='nav-item'>
               <NavLink
