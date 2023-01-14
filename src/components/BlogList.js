@@ -79,9 +79,10 @@ export default function BlogList({isAdmin}) {
         e.stopPropagation() // 이벤트 버블링 방지.
         axios.delete(`http://localhost:3001/posts/${id}`)
             .then(()=>{
-                setLists(prevPost=>{ // 삭제 후 리스트 스테이트 변경.
-                    return prevPost.filter(post=>{ return post.id !== id })
-                })
+                // setLists(prevPost=>{ // 삭제 후 리스트 스테이트 변경.
+                //     return prevPost.filter(post=>{ return post.id !== id })
+                // })
+                getPosts(1)
                 addToasts({
                     text : '성공적으로 삭제되었습니다.',
                     type : 'success'

@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { Link,Outlet,NavLink } from 'react-router-dom'
 import Toast from './components/Toast'
 import useToasts from './hooks/toast'
 import { logIn, logOut } from './store/authSlice'
+import LoadingSpinner from './components/LoadingSpinner'
 
 export default function Root() {
 
   const {toasts,addToasts,deleteToast} = useToasts()
   const isLoggedIn = useSelector(state=>state.auth.isLoggedIn)
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+  if (localStorage.getItem('isLoggedIn')){
+    dispatch(logIn())
+  }
+  setLoading(false)
+  }, [dispatch])
+
+  if(loading){
+    return (
+        <LoadingSpinner/>
+    )
+}
 
   const loginHandler = () =>{
     if(isLoggedIn){

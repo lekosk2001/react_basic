@@ -1,13 +1,6 @@
 {
   "posts": [
     {
-      "title": "fgh",
-      "body": "fghghffgh",
-      "publish": false,
-      "createdAt": 1673704930693,
-      "id": 1
-    },
-    {
       "title": "4242432",
       "body": "234",
       "publish": true,

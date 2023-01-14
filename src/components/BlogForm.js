@@ -123,6 +123,7 @@ useEffect(() => {
         setOriginalTitle(res.data.title);
         setOriginalBody(res.data.body);
         setOriginalPublish(res.data.publish);
+        setLoading(false)
         })
         .catch((e)=>{
             setError('게시글 불러오기 실패.')
