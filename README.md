@@ -7,3 +7,5 @@
 - json-server : 가짜 서버를 만들어주는 라이브러리.
 - react-router-dom : 6.4v
 - 부트스트랩
+- uuid : 고유 id 생성라이브러리 
+- 리덕스 툴킷
