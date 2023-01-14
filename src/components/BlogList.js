@@ -1,13 +1,10 @@
 import Card from '../components/Card'
 import LoadingSpinner from '../components/LoadingSpinner'
 import React, { useState,useEffect } from 'react'
-import { useLocation, useNavigate  } from 'react-router-dom'
+import { useLocation, useNavigate,useOutletContext  } from 'react-router-dom'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import Pagenation from './Pagenation'
-import Toast from './Toast'
-import { v4 as uuidv4 } from 'uuid';
-
 export default function BlogList({isAdmin}) {
 
     const [lists, setLists] = useState([])
@@ -21,28 +18,8 @@ export default function BlogList({isAdmin}) {
     const location = useLocation();
     const params = new URLSearchParams(location.search)
     const pageParam =  params.get('page')
-    const [toasts,setToasts] = useState([])
+    const addToasts = useOutletContext();
 
-// 토스트 제거 함수.
-// 토스트 렌더 시, 온클릭 프롭으로 컴포넌트안에 내려주는 함수로,
-// 토스트 배열에서 id인자로 받아온 토스트 스테이트를 걸러주는 함수.
-const deleteToast =(id)=>{
-    const filteredToasts = toasts.filter((toast)=>{
-        return toast.id !== id
-    })
-    setToasts(filteredToasts)
-}
-
-//토스트 추가 함수,
-// 토스트에 아이디를 담고, 토스트 배열에 추가.
-    const addToasts = (toast) =>{
-        const id = uuidv4();
-        const toastWithId = {...toast,id:id}
-        setToasts(prev=>[...prev,toastWithId])
-        setTimeout(() => {
-            deleteToast(id)
-        }, 3000);
-    }
 
 // 최초 마운트 시,
 // 페이지 번호 스테이트 변경 (1페이지,)
@@ -148,11 +125,6 @@ const deleteToast =(id)=>{
 
     return (
     <>  
-
-        <Toast
-            toasts={toasts}
-            deleteToast={deleteToast}
-        />
         <input
             type="text"
             placeholder=" 검색"

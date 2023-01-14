@@ -3,43 +3,43 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams  } from 'react-router-dom'
 
-function BlogForm({editing}) {
+function BlogForm({editing,addToasts}) {
+    const navigate = useNavigate()
+    const [originalTitle, setOriginalTitle] = useState('')
+    const [title, setTitle] = useState('')
+    const [originalBody, setOriginalBody] = useState('')
+    const [body, setBody] = useState('')
+    const [originalPublish, setOriginalPublish] = useState(false)
+    const [publish, setPublish] = useState(false)
+    const [titleError, setTitleError] =useState(false)
+    const [bodyError, setBodyError] =useState(false)
 
-const navigate = useNavigate()
-
-const [originalTitle, setOriginalTitle] = useState('')
-const [title, setTitle] = useState('')
-const [originalBody, setOriginalBody] = useState('')
-const [body, setBody] = useState('')
-const [originalPublish, setOriginalPublish] = useState(false)
-const [publish, setPublish] = useState(false)
-const [titleError, setTitleError] =useState(false)
-const [bodyError, setBodyError] =useState(false)
-
-const isEdited = () => {
-    return title !== originalTitle || body !== originalBody || publish !== originalPublish
-}
-
-const onChangePublish = (e) => {
-    setPublish(e.target.checked)
-}
-const { id } = useParams();
-
-const validateForm = () => {
-    let validated = true
-
-    if (title === ''){
-        setTitleError(true)
-        validated = false
+    const isEdited = () => {
+        return title !== originalTitle || body !== originalBody || publish !== originalPublish
     }
 
-    if (body === ''){
-        setBodyError(true)
-        validated = false
+    const onChangePublish = (e) => {
+        setPublish(e.target.checked)
     }
+    const { id } = useParams();
 
-    return validated
-}
+
+// 유효성 검사.
+    const validateForm = () => {
+        let validated = true
+
+        if (title === ''){
+            setTitleError(true)
+            validated = false
+        }
+
+        if (body === ''){
+            setBodyError(true)
+            validated = false
+        }
+
+        return validated
+    }
 
 const onSubmit = () =>{
     setTitleError(false)
@@ -51,14 +51,26 @@ const onSubmit = () =>{
                 title,
                 body,
                 publish,
-            }).then(navigate(`/blogs/${id}`))
+            }).then(()=>{
+                addToasts({
+                    type:'success',
+                    text: '성공적으로 수정되었습니다.'
+                })
+                navigate(`/blogs/${id}`)
+            })
         }else{
             axios.post('http://localhost:3001/posts',{
                 title,
                 body,
                 publish,
                 createdAt:Date.now()
-            }).then(navigate("/admin"))
+            }).then(()=>{
+                addToasts({
+                    type:'success',
+                    text: '성공적으로 생성되었습니다.'
+                })
+                navigate("/admin")
+            })
         }
     }
 }
@@ -90,6 +102,7 @@ useEffect(() => {
 
 return (
 <div>
+
     <h1>{editing?"Edit post":"Create a blog post"}</h1>
         <div className='mb-3'>
             <label className='form-lable'>Title</label>
