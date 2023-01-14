@@ -1,3 +1,11 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "title": "sdaasd",
+      "body": "asdasd",
+      "publish": false,
+      "createdAt": 1673695496351,
+      "id": 1
+    }
+  ]
 }

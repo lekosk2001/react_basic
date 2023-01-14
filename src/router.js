@@ -6,9 +6,7 @@ import AdminBlogListsPage from './pages/AdminBlogListsPage';
 import BlogEditPage from './pages/BlogEditPage';
 import BlogShowPage from './pages/BlogShowPage';
 import Root from './Root'
-import {
-    createBrowserRouter
-} from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 
 const router = createBrowserRouter([
     {
@@ -26,15 +24,18 @@ const router = createBrowserRouter([
             },
             {
                 path: "admin",
-                element: <AdminBlogListsPage />
+                element: <AdminBlogListsPage />,
+                auth:true
             },
             {
                 path: "blogs/create",
-                element: <BlogCreatePage />
+                element: <BlogCreatePage />,
+                auth:true
             },
             {
                 path: "blogs/:id/edit",
-                element: <BlogEditPage />
+                element: <BlogEditPage />,
+                auth:true
             },
             {
                 path: "blogs/:id",
