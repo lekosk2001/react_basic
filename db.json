@@ -1,18 +1,3 @@
 {
-  "posts": [
-    {
-      "title": "dfggdfdfg",
-      "body": "dfgdfgdfgdfg",
-      "publish": false,
-      "createdAt": 1673512620587,
-      "id": 1
-    },
-    {
-      "title": "JKLKJ",
-      "body": "JKL",
-      "publish": false,
-      "createdAt": 1673682038464,
-      "id": 2
-    }
-  ]
+  "posts": []
 }

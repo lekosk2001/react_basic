@@ -2,8 +2,11 @@ import React from 'react'
 import { Link,Outlet,NavLink } from 'react-router-dom'
 import Toast from './components/Toast'
 import useToasts from './hooks/toast'
+
 export default function Root() {
-  const [toasts,addToasts,deleteToast] = useToasts()
+
+  const {toasts,addToasts,deleteToast} = useToasts()
+
   return (
     <>
     <Toast

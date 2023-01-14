@@ -1,10 +1,11 @@
 import Card from '../components/Card'
 import LoadingSpinner from '../components/LoadingSpinner'
 import React, { useState,useEffect } from 'react'
-import { useLocation, useNavigate,useOutletContext  } from 'react-router-dom'
+import { useLocation, useNavigate  } from 'react-router-dom'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import Pagenation from './Pagenation'
+import useToasts from '../hooks/toast'
 export default function BlogList({isAdmin}) {
 
     const [lists, setLists] = useState([])
@@ -18,7 +19,8 @@ export default function BlogList({isAdmin}) {
     const location = useLocation();
     const params = new URLSearchParams(location.search)
     const pageParam =  params.get('page')
-    const addToasts = useOutletContext();
+    const {addToasts} = useToasts()
+
 
 
 // 최초 마운트 시,
